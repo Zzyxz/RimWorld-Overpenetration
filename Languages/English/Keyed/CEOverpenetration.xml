@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<ZZOP_Enabled>Bullets can pass through pawns</ZZOP_Enabled>
+	<ZZOP_MaxPasses>Most pawns one bullet can pass through: {0}</ZZOP_MaxPasses>
+	<ZZOP_MinResidual>Penetration needed after the exit: {0} mm RHA</ZZOP_MinResidual>
+	<ZZOP_MinResidualDesc>A bullet only keeps flying if at least this much penetration is left once it is out of the body.</ZZOP_MinResidualDesc>
+	<ZZOP_Thickness>Body thickness: x{0}</ZZOP_Thickness>
+	<ZZOP_ThicknessDesc>How much the body itself slows a bullet down. Higher values mean fewer bullets pass through. Thicker body parts and bigger creatures count more.</ZZOP_ThicknessDesc>
+	<ZZOP_ExitArmor>Armor counts again on the way out</ZZOP_ExitArmor>
+	<ZZOP_ExitArmorDesc>A vest has a front and a back. With this on, the armor on the hit body part has to be penetrated twice.</ZZOP_ExitArmorDesc>
+	<ZZOP_Fragments>Fragments can pass through pawns</ZZOP_Fragments>
+	<ZZOP_Reset>Reset to defaults</ZZOP_Reset>
+</LanguageData>
