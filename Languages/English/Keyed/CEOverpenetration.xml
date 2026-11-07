@@ -9,5 +9,7 @@
 	<ZZOP_ExitArmor>Armor counts again on the way out</ZZOP_ExitArmor>
 	<ZZOP_ExitArmorDesc>A vest has a front and a back. With this on, the armor on the hit body part has to be penetrated twice.</ZZOP_ExitArmorDesc>
 	<ZZOP_Fragments>Fragments can pass through pawns</ZZOP_Fragments>
+	<ZZOP_DebugLog>Write each hit to the log</ZZOP_DebugLog>
+	<ZZOP_DebugLogDesc>For testing. Every bullet that hits a pawn writes one line to the log with the hit body part, penetration, armor, body thickness, what was left and whether it went through.</ZZOP_DebugLogDesc>
 	<ZZOP_Reset>Reset to defaults</ZZOP_Reset>
 </LanguageData>

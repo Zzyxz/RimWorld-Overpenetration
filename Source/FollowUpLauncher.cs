@@ -15,22 +15,27 @@ internal static class FollowUpLauncher
         var source = context.projectile;
         if (context.blocked)
         {
+            DebugLog(context, "stopped: deflected, absorbed by a shield or no damage");
             return;
         }
         if (context.hitPart == null || context.penetration <= 0f || context.map == null || source.launcher == null)
         {
+            DebugLog(context, "stopped: no hit part, no penetration or no shooter");
             return;
         }
 
         var residual = ResidualPenetration(context, settings, out var density, out var thickness);
+        var numbers = !settings.debugLog ? null : $"part {context.hitPart.LabelShort}, pen {context.penetration:0.00}, armor in {context.entryArmor:0.00}, armor out {(settings.exitArmor ? context.exitArmor : 0f):0.00}, body {density:0.00}+{thickness:0.00}, rest {residual:0.00}";
         if (residual < settings.minResidual)
         {
+            DebugLog(context, !settings.debugLog ? null : $"stopped inside: {numbers}, needed {settings.minResidual:0.0}");
             return;
         }
 
         var direction = context.position - context.lastPos;
         if (direction.sqrMagnitude < 1e-6f)
         {
+            DebugLog(context, !settings.debugLog ? null : $"stopped: no flight direction, {numbers}");
             return;
         }
         direction.Normalize();
@@ -44,10 +49,12 @@ internal static class FollowUpLauncher
         var cell = exit.ToIntVec3();
         if (exit.y <= 0f || !cell.InBounds(context.map))
         {
+            DebugLog(context, !settings.debugLog ? null : $"stopped: exit below ground or off the map, {numbers}");
             return;
         }
 
         var damage = context.damage * residual / context.penetration;
+        DebugLog(context, !settings.debugLog ? null : $"passed through: {numbers}, damage {context.damage:0.0} -> {damage:0.0}, pass {context.passes + 1}/{settings.maxPasses}");
         var shotAngle = Mathf.Atan2(direction.y, new Vector2(direction.x, direction.z).magnitude);
         var shotRotation = (-90f + Mathf.Rad2Deg * Mathf.Atan2(direction.z, direction.x)) % 360f;
 
@@ -113,6 +120,14 @@ internal static class FollowUpLauncher
             return false;
         }
         return !((pawn.stances?.curStance as Stance_Busy)?.verb != null && part.IsInGroup(CE_BodyPartGroupDefOf.RightArm));
+    }
+
+    private static void DebugLog(ImpactContext context, string text)
+    {
+        if (OverpenetrationMod.Settings.debugLog)
+        {
+            Log.Message($"[Overpenetration] {context.projectile.def.defName} hit {context.pawn.LabelShort}: {text}");
+        }
     }
 
     private static float ResidualPenetration(ImpactContext context, OverpenetrationSettings settings, out float density, out float thickness)

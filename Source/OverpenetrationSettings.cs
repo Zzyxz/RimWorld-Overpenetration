@@ -16,9 +16,11 @@ public class OverpenetrationSettings : ModSettings
     public float thickness = DefaultThickness;
     public bool exitArmor = true;
     public bool fragments;
+    public bool debugLog;
 
     public override void ExposeData()
     {
+        Scribe_Values.Look(ref debugLog, "debugLog", false);
         Scribe_Values.Look(ref enabled, "enabled", true);
         Scribe_Values.Look(ref maxPasses, "maxPasses", DefaultMaxPasses);
         Scribe_Values.Look(ref minResidual, "minResidual", DefaultMinResidual);
@@ -35,6 +37,7 @@ public class OverpenetrationSettings : ModSettings
         thickness = DefaultThickness;
         exitArmor = true;
         fragments = false;
+        debugLog = false;
     }
 }
 
@@ -66,6 +69,7 @@ public class OverpenetrationMod : Mod
         list.Gap();
         list.CheckboxLabeled("ZZOP_ExitArmor".Translate(), ref s.exitArmor, "ZZOP_ExitArmorDesc".Translate());
         list.CheckboxLabeled("ZZOP_Fragments".Translate(), ref s.fragments);
+        list.CheckboxLabeled("ZZOP_DebugLog".Translate(), ref s.debugLog, "ZZOP_DebugLogDesc".Translate());
         list.Gap();
         if (list.ButtonText("ZZOP_Reset".Translate()))
         {
