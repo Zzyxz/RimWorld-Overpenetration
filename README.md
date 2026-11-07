@@ -20,7 +20,7 @@ Walls, doors, cover and trees get their value from their material. Buildings wit
 </modExtensions>
 ```
 
-`material` is the value in mm RHA at full hit points. Use `<impenetrable>true</impenetrable>` instead to stop every bullet.
+`material` is the value in mm RHA at full hit points. The hit point condition and the wall strength setting still apply. Use `<impenetrable>true</impenetrable>` instead to stop every bullet. Only buildings and trees are checked.
 
 ## Building
 
