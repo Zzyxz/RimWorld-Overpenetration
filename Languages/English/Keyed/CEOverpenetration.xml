@@ -10,7 +10,7 @@
 	<ZZOP_ExitArmorDesc>A vest has a front and a back. With this on, the armor on the hit body part has to be penetrated twice.</ZZOP_ExitArmorDesc>
 	<ZZOP_Fragments>Fragments can pass through pawns</ZZOP_Fragments>
 	<ZZOP_Walls>Bullets can pass through walls, cover and trees</ZZOP_Walls>
-	<ZZOP_WallsDesc>Walls, doors, barricades, sandbags and trees stop a bullet only if they are strong enough. Wood lets a lot through, steel little, stone and plasteel hardly anything. Natural rock and machines always stop bullets. Your own people behind your own walls can get hit too.</ZZOP_WallsDesc>
+	<ZZOP_WallsDesc>Walls, doors, barricades, sandbags and trees stop a bullet only if they are strong enough. Wood lets a lot through, steel little, stone and plasteel hardly anything. Natural rock, machines and indestructible buildings always stop bullets. Curtains let almost everything through. Your own people behind your own walls can get hit too.</ZZOP_WallsDesc>
 	<ZZOP_WallStrength>Wall strength: x{0}</ZZOP_WallStrength>
 	<ZZOP_WallStrengthDesc>Higher values mean fewer bullets go through walls, cover and trees.</ZZOP_WallStrengthDesc>
 	<ZZOP_DamagedWalls>Damaged walls let more through</ZZOP_DamagedWalls>

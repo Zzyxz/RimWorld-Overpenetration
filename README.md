@@ -8,6 +8,20 @@ Bullets with enough armor penetration left after hitting a pawn keep flying and 
 - Harmony
 - Combat Extended
 
+## For other mods
+
+Walls, doors, cover and trees get their value from their material. Buildings without a material, indestructible buildings and natural rock stop every bullet. A mod can set its own value on any ThingDef:
+
+```xml
+<modExtensions>
+  <li Class="CEOverpenetration.PenetrationExtension">
+    <material>18</material>
+  </li>
+</modExtensions>
+```
+
+`material` is the value in mm RHA at full hit points. Use `<impenetrable>true</impenetrable>` instead to stop every bullet.
+
 ## Building
 
 Run `Source/Build.ps1`. It builds the 1.7 and 1.6 assemblies and copies the mod files to `Mods/CEOverpenetration`.
