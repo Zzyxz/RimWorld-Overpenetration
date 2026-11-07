@@ -67,9 +67,9 @@ internal static class FollowUpLauncher
         }
         var exit = ExitPoint(bounds, context.position, direction);
         var cell = exit.ToIntVec3();
-        if (exit.y <= 0f || !cell.InBounds(context.map))
+        if (exit.y <= 0f || !cell.InBounds(context.map) || exit.y >= CollisionVertical.WallCollisionHeight && cell.Roofed(context.map))
         {
-            DebugLog(context, !settings.debugLog ? null : $"stopped: exit below ground or off the map, {numbers}");
+            DebugLog(context, !settings.debugLog ? null : $"stopped: exit below ground, inside a roof or off the map, {numbers}");
             return;
         }
 
