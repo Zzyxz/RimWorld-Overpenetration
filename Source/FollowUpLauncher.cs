@@ -74,7 +74,7 @@ internal static class FollowUpLauncher
         }
 
         var damage = context.damage * residual / context.penetration;
-        DebugLog(context, !settings.debugLog ? null : $"passed through: {numbers}, damage {context.damage:0.0} -> {damage:0.0}, pass {context.passes + 1}/{settings.maxPasses}");
+        DebugLog(context, !settings.debugLog ? null : $"passed through: {numbers}, exit height {exit.y:0.00}, damage {context.damage:0.0} -> {damage:0.0}, pass {context.passes + 1}/{settings.maxPasses}");
         var shotAngle = Mathf.Atan2(direction.y, new Vector2(direction.x, direction.z).magnitude);
         var shotRotation = (-90f + Mathf.Rad2Deg * Mathf.Atan2(direction.z, direction.x)) % 360f;
 
