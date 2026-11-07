@@ -16,6 +16,9 @@ public class OverpenetrationSettings : ModSettings
     public float thickness = DefaultThickness;
     public bool exitArmor = true;
     public bool fragments;
+    public bool walls;
+    public float wallStrength = 1f;
+    public bool damagedWalls = true;
     public bool debugLog;
 
     public override void ExposeData()
@@ -27,6 +30,9 @@ public class OverpenetrationSettings : ModSettings
         Scribe_Values.Look(ref thickness, "thickness", DefaultThickness);
         Scribe_Values.Look(ref exitArmor, "exitArmor", true);
         Scribe_Values.Look(ref fragments, "fragments", false);
+        Scribe_Values.Look(ref walls, "walls", false);
+        Scribe_Values.Look(ref wallStrength, "wallStrength", 1f);
+        Scribe_Values.Look(ref damagedWalls, "damagedWalls", true);
     }
 
     public void Reset()
@@ -37,6 +43,9 @@ public class OverpenetrationSettings : ModSettings
         thickness = DefaultThickness;
         exitArmor = true;
         fragments = false;
+        walls = false;
+        wallStrength = 1f;
+        damagedWalls = true;
         debugLog = false;
     }
 }
@@ -69,6 +78,12 @@ public class OverpenetrationMod : Mod
         list.Gap();
         list.CheckboxLabeled("ZZOP_ExitArmor".Translate(), ref s.exitArmor, "ZZOP_ExitArmorDesc".Translate());
         list.CheckboxLabeled("ZZOP_Fragments".Translate(), ref s.fragments);
+        list.GapLine();
+        list.CheckboxLabeled("ZZOP_Walls".Translate(), ref s.walls, "ZZOP_WallsDesc".Translate());
+        list.Label("ZZOP_WallStrength".Translate(s.wallStrength.ToString("0.0")), tooltip: "ZZOP_WallStrengthDesc".Translate());
+        s.wallStrength = Mathf.Round(list.Slider(s.wallStrength, 0.2f, 3f) * 10f) / 10f;
+        list.CheckboxLabeled("ZZOP_DamagedWalls".Translate(), ref s.damagedWalls, "ZZOP_DamagedWallsDesc".Translate());
+        list.GapLine();
         list.CheckboxLabeled("ZZOP_DebugLog".Translate(), ref s.debugLog, "ZZOP_DebugLogDesc".Translate());
         list.Gap();
         if (list.ButtonText("ZZOP_Reset".Translate()))

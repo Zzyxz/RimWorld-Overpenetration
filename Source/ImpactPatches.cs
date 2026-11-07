@@ -11,9 +11,12 @@ namespace CEOverpenetration;
 internal sealed class ImpactContext
 {
     public BulletCE projectile;
+    public Thing target;
     public Pawn pawn;
+    public Thing obstacle;
+    public float hitPointsFraction;
     public Map map;
-    public Bounds pawnBounds;
+    public Bounds targetBounds;
     public Vector3 position;
     public Vector3 lastPos;
     public float speed;
@@ -60,7 +63,13 @@ internal static class Patch_BulletCE_Impact
         }
 
         var settings = OverpenetrationMod.Settings;
-        if (settings == null || !settings.enabled || !(hitThing is Pawn pawn) || !pawn.Spawned)
+        if (settings == null || !settings.enabled || hitThing == null || !hitThing.Spawned)
+        {
+            return;
+        }
+        var pawn = hitThing as Pawn;
+        var obstacle = pawn == null && settings.walls && ObstacleMaterial.IsObstacle(hitThing) ? hitThing : null;
+        if (pawn == null && obstacle == null)
         {
             return;
         }
@@ -75,9 +84,13 @@ internal static class Patch_BulletCE_Impact
         __state.context = new ImpactContext
         {
             projectile = __instance,
+            target = hitThing,
             pawn = pawn,
+            obstacle = obstacle,
+            hitPointsFraction = obstacle != null && obstacle.def.useHitPoints && obstacle.MaxHitPoints > 0 ? (float)obstacle.HitPoints / obstacle.MaxHitPoints : 1f,
+            penetration = obstacle != null ? __instance.PenetrationAmount : 0f,
             map = __instance.Map,
-            pawnBounds = CE_Utility.GetBoundsFor(pawn),
+            targetBounds = CE_Utility.GetBoundsFor(hitThing),
             position = __instance.ExactPosition,
             lastPos = __instance.LastPos,
             speed = __instance.shotSpeed,
@@ -147,7 +160,7 @@ internal static class Patch_GetAfterArmorDamage
     {
         depth++;
         var context = Patch_BulletCE_Impact.Current;
-        __state = context != null && depth == 1 && pawn == context.pawn && originalDinfo.Def == context.projectile.DamageDef;
+        __state = context != null && depth == 1 && context.pawn != null && pawn == context.pawn && originalDinfo.Def == context.projectile.DamageDef;
         if (__state && context.hitPart == null && hitPart != null)
         {
             context.hitPart = hitPart;
@@ -181,7 +194,7 @@ internal static class Patch_ProjectileCE_CanCollideWith
     private static bool Prefix(ProjectileCE __instance, Thing thing, ref float dist, ref bool __result)
     {
         var state = PenetrationTracker.Get(__instance);
-        if (state == null || state.passedPawn == null || thing != state.passedPawn)
+        if (state == null || state.passedThing == null || thing != state.passedThing)
         {
             return true;
         }

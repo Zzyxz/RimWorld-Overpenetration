@@ -9,14 +9,14 @@ public class FollowUpState : IExposable
     public float penetration;
     public float damage;
     public int passes;
-    public Pawn passedPawn;
+    public Thing passedThing;
 
     public void ExposeData()
     {
         Scribe_Values.Look(ref penetration, "penetration");
         Scribe_Values.Look(ref damage, "damage");
         Scribe_Values.Look(ref passes, "passes");
-        Scribe_References.Look(ref passedPawn, "passedPawn");
+        Scribe_References.Look(ref passedThing, "passedThing");
     }
 }
 

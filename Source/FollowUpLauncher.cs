@@ -13,19 +13,39 @@ internal static class FollowUpLauncher
     {
         var settings = OverpenetrationMod.Settings;
         var source = context.projectile;
-        if (context.blocked)
+        float residual;
+        string numbers;
+        if (context.obstacle != null)
         {
-            DebugLog(context, "stopped: deflected, absorbed by a shield or no damage");
-            return;
+            if (context.penetration <= 0f || context.map == null || source.launcher == null)
+            {
+                DebugLog(context, "stopped: no penetration or no shooter");
+                return;
+            }
+            var material = ObstacleMaterial.Value(context.obstacle, context.hitPointsFraction, settings);
+            if (material < 0f)
+            {
+                DebugLog(context, !settings.debugLog ? null : $"stopped: cannot be penetrated ({ObstacleMaterial.Describe(context.obstacle, context.hitPointsFraction)})");
+                return;
+            }
+            residual = context.penetration - material;
+            numbers = !settings.debugLog ? null : $"{ObstacleMaterial.Describe(context.obstacle, context.hitPointsFraction)}, pen {context.penetration:0.00}, material {material:0.00}, rest {residual:0.00}";
         }
-        if (context.hitPart == null || context.penetration <= 0f || context.map == null || source.launcher == null)
+        else
         {
-            DebugLog(context, "stopped: no hit part, no penetration or no shooter");
-            return;
+            if (context.blocked)
+            {
+                DebugLog(context, "stopped: deflected, absorbed by a shield or no damage");
+                return;
+            }
+            if (context.hitPart == null || context.penetration <= 0f || context.map == null || source.launcher == null)
+            {
+                DebugLog(context, "stopped: no armor check (shield belt or no damage), no penetration or no shooter");
+                return;
+            }
+            residual = ResidualPenetration(context, settings, out var density, out var thickness);
+            numbers = !settings.debugLog ? null : $"part {context.hitPart.LabelShort}, pen {context.penetration:0.00}, armor in {context.entryArmor:0.00}, armor out {(settings.exitArmor ? context.exitArmor : 0f):0.00}, body {density:0.00}+{thickness:0.00}, rest {residual:0.00}";
         }
-
-        var residual = ResidualPenetration(context, settings, out var density, out var thickness);
-        var numbers = !settings.debugLog ? null : $"part {context.hitPart.LabelShort}, pen {context.penetration:0.00}, armor in {context.entryArmor:0.00}, armor out {(settings.exitArmor ? context.exitArmor : 0f):0.00}, body {density:0.00}+{thickness:0.00}, rest {residual:0.00}";
         if (residual < settings.minResidual)
         {
             DebugLog(context, !settings.debugLog ? null : $"stopped inside: {numbers}, needed {settings.minResidual:0.0}");
@@ -40,8 +60,8 @@ internal static class FollowUpLauncher
         }
         direction.Normalize();
 
-        var bounds = context.pawnBounds;
-        if (context.pawn.Spawned)
+        var bounds = context.targetBounds;
+        if (context.pawn != null && context.pawn.Spawned)
         {
             bounds.Encapsulate(CE_Utility.GetBoundsFor(context.pawn));
         }
@@ -74,7 +94,7 @@ internal static class FollowUpLauncher
             penetration = residual,
             damage = damage,
             passes = context.passes + 1,
-            passedPawn = context.pawn
+            passedThing = context.target
         });
     }
 
@@ -126,7 +146,7 @@ internal static class FollowUpLauncher
     {
         if (OverpenetrationMod.Settings.debugLog)
         {
-            Log.Message($"[Overpenetration] {context.projectile.def.defName} hit {context.pawn.LabelShort}: {text}");
+            Log.Message($"[Overpenetration] {context.projectile.def.defName} hit {context.target.LabelShort}: {text}");
         }
     }
 
