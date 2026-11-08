@@ -9,7 +9,7 @@ foreach ($version in "1.7", "1.6") {
     if ($LASTEXITCODE -ne 0) { throw "Build for RimWorld $version failed" }
 }
 
-foreach ($folder in "Languages") {
+foreach ($folder in "Languages", "Patches") {
     robocopy (Join-Path $repo $folder) (Join-Path $mod $folder) /MIR /NJH /NJS /NFL /NDL /NP | Out-Null
     if ($LASTEXITCODE -ge 8) { throw "Copying $folder failed" }
 }

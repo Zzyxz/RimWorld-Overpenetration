@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationAddModExtension">
+		<success>Always</success>
+		<xpath>Defs/ThingDef[defName="AncientConcreteBarrier" or defName="AncientBarrierLong" or defName="AncientMilitaryBarrier"]</xpath>
+		<value>
+			<li Class="CEOverpenetration.PenetrationExtension">
+				<material>30</material>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<success>Always</success>
+		<xpath>Defs/ThingDef[defName="AncientFence"]</xpath>
+		<value>
+			<li Class="CEOverpenetration.PenetrationExtension">
+				<material>1</material>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<success>Always</success>
+		<xpath>Defs/ThingDef[defName="VFEArch_LogWall"]</xpath>
+		<value>
+			<li Class="CEOverpenetration.PenetrationExtension">
+				<material>10</material>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<success>Always</success>
+		<xpath>Defs/ThingDef[defName="VFEArch_HedgeWall"]</xpath>
+		<value>
+			<li Class="CEOverpenetration.PenetrationExtension">
+				<material>2</material>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<success>Always</success>
+		<xpath>Defs/ThingDef[defName="FT_Barrier" or defName="FT_BarrierDiagonal"]</xpath>
+		<value>
+			<li Class="CEOverpenetration.PenetrationExtension">
+				<material>30</material>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<success>Always</success>
+		<xpath>Defs/ThingDef[defName="ZZFB_GlassWall"]</xpath>
+		<value>
+			<li Class="CEOverpenetration.PenetrationExtension">
+				<material>2</material>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<success>Always</success>
+		<xpath>Defs/ThingDef[defName="ZZFB_CageBars"]</xpath>
+		<value>
+			<li Class="CEOverpenetration.PenetrationExtension">
+				<material>2</material>
+			</li>
+		</value>
+	</Operation>
+</Patch>
