@@ -207,6 +207,7 @@ internal static class Patch_ProjectileCE_CanCollideWith
 [HarmonyPatch(typeof(ProjectileCE), nameof(ProjectileCE.PenetrationAmount), MethodType.Getter)]
 internal static class Patch_ProjectileCE_PenetrationAmount
 {
+    [HarmonyPriority(Priority.First)]
     private static void Postfix(ProjectileCE __instance, ref float __result)
     {
         var state = PenetrationTracker.Get(__instance);
