@@ -17,7 +17,7 @@ public class OverpenetrationSettings : ModSettings
     public float thickness = DefaultThickness;
     public bool exitArmor = true;
     public bool fragments;
-    public bool walls;
+    public bool walls = true;
     public float wallStrength = 1f;
     public bool damagedWalls = true;
     public float blindFireChance = DefaultBlindFireChance;
@@ -32,7 +32,7 @@ public class OverpenetrationSettings : ModSettings
         Scribe_Values.Look(ref thickness, "thickness", DefaultThickness);
         Scribe_Values.Look(ref exitArmor, "exitArmor", true);
         Scribe_Values.Look(ref fragments, "fragments", false);
-        Scribe_Values.Look(ref walls, "walls", false);
+        Scribe_Values.Look(ref walls, "walls", true);
         Scribe_Values.Look(ref wallStrength, "wallStrength", 1f);
         Scribe_Values.Look(ref damagedWalls, "damagedWalls", true);
         Scribe_Values.Look(ref blindFireChance, "blindFireChance", DefaultBlindFireChance);
@@ -46,7 +46,7 @@ public class OverpenetrationSettings : ModSettings
         thickness = DefaultThickness;
         exitArmor = true;
         fragments = false;
-        walls = false;
+        walls = true;
         wallStrength = 1f;
         damagedWalls = true;
         blindFireChance = DefaultBlindFireChance;
