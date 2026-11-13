@@ -9,6 +9,7 @@ public class OverpenetrationSettings : ModSettings
     public const int DefaultMaxPasses = 2;
     public const float DefaultMinResidual = 1f;
     public const float DefaultThickness = 2f;
+    public const float DefaultBlindFireChance = 0.15f;
 
     public bool enabled = true;
     public int maxPasses = DefaultMaxPasses;
@@ -19,6 +20,7 @@ public class OverpenetrationSettings : ModSettings
     public bool walls;
     public float wallStrength = 1f;
     public bool damagedWalls = true;
+    public float blindFireChance = DefaultBlindFireChance;
     public bool debugLog;
 
     public override void ExposeData()
@@ -33,6 +35,7 @@ public class OverpenetrationSettings : ModSettings
         Scribe_Values.Look(ref walls, "walls", false);
         Scribe_Values.Look(ref wallStrength, "wallStrength", 1f);
         Scribe_Values.Look(ref damagedWalls, "damagedWalls", true);
+        Scribe_Values.Look(ref blindFireChance, "blindFireChance", DefaultBlindFireChance);
     }
 
     public void Reset()
@@ -46,6 +49,7 @@ public class OverpenetrationSettings : ModSettings
         walls = false;
         wallStrength = 1f;
         damagedWalls = true;
+        blindFireChance = DefaultBlindFireChance;
         debugLog = false;
     }
 }
@@ -83,6 +87,8 @@ public class OverpenetrationMod : Mod
         list.Label("ZZOP_WallStrength".Translate(s.wallStrength.ToString("0.0")), tooltip: "ZZOP_WallStrengthDesc".Translate());
         s.wallStrength = Mathf.Round(list.Slider(s.wallStrength, 0.2f, 3f) * 10f) / 10f;
         list.CheckboxLabeled("ZZOP_DamagedWalls".Translate(), ref s.damagedWalls, "ZZOP_DamagedWallsDesc".Translate());
+        list.Label("ZZOP_BlindFire".Translate(s.blindFireChance.ToStringPercent()), tooltip: "ZZOP_BlindFireDesc".Translate());
+        s.blindFireChance = Mathf.Round(list.Slider(s.blindFireChance, 0f, 1f) * 20f) / 20f;
         list.GapLine();
         list.CheckboxLabeled("ZZOP_DebugLog".Translate(), ref s.debugLog, "ZZOP_DebugLogDesc".Translate());
         list.Gap();

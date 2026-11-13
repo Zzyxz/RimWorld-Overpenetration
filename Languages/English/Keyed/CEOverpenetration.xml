@@ -15,6 +15,8 @@
 	<ZZOP_WallStrengthDesc>Higher values mean fewer bullets go through walls, cover and trees.</ZZOP_WallStrengthDesc>
 	<ZZOP_DamagedWalls>Damaged walls let more through</ZZOP_DamagedWalls>
 	<ZZOP_DamagedWallsDesc>A wall at half its hit points stops a bullet like a wall about two thirds as strong.</ZZOP_DamagedWallsDesc>
+	<ZZOP_BlindFire>Enemies fire blind through walls: {0}</ZZOP_BlindFire>
+	<ZZOP_BlindFireDesc>Chance that an enemy fires one burst through a door or a thin wall like wood when it loses sight of someone it was just fighting. Never through stone or steel walls, and only if its ammo can get through. After that it waits a while before it can do it again. Your own pawns never do this on their own. 0% turns it off.</ZZOP_BlindFireDesc>
 	<ZZOP_DebugLog>Write each hit to the log</ZZOP_DebugLog>
 	<ZZOP_DebugLogDesc>For testing. Every bullet that is allowed to pass through and hits a pawn, wall or tree writes one line to the log with the numbers behind it and whether it went through.</ZZOP_DebugLogDesc>
 	<ZZOP_Reset>Reset to defaults</ZZOP_Reset>

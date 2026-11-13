@@ -30,5 +30,5 @@ What is left is worked out with Combat Extended's own numbers: the bullet's pene
 
 Only bullets pass through. Arrows, bolts, lasers and explosive rounds don't. Fire, explosions and other extra damage only hit the first target. Fragments don't pass through unless switched on in the settings.
 
-Walls, doors, sandbags and trees can be shot through too if you switch it on in the settings. Wood lets a lot through, steel little, stone and plasteel hardly anything. Damaged walls let more through. Natural rock, indestructible buildings and buildings without a material, like most machines, always stop bullets. Other mods can set their own values.</description>
+Walls, doors, sandbags and trees can be shot through too if you switch it on in the settings. Wood lets a lot through, steel little, stone and plasteel hardly anything. Damaged walls let more through. Natural rock, indestructible buildings and buildings without a material, like most machines, always stop bullets. Other mods can set their own values. Enemies who lose sight of someone sometimes fire blind through a door or a thin wall their ammo can get through.</description>
 </ModMetaData>

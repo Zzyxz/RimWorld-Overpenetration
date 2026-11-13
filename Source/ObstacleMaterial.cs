@@ -15,10 +15,17 @@ internal static class ObstacleMaterial
     private const float MinTreeGrowth = 0.2f;
     private const float DoorFactor = 0.5f;
     private const float WornFloor = 0.3f;
+    private const float ThinValue = 6f;
 
     public static bool IsObstacle(Thing thing)
     {
         return thing is Building || thing is Plant plant && plant.def.plant != null && plant.def.plant.IsTree;
+    }
+
+    public static bool IsThin(Thing thing)
+    {
+        var value = BaseValue(thing);
+        return value >= 0f && value <= ThinValue;
     }
 
     public static float Value(Thing thing, float hitPointsFraction, OverpenetrationSettings settings)
