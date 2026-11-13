@@ -8,6 +8,7 @@ namespace CEOverpenetration;
 internal static class FollowUpLauncher
 {
     private const float ExitOffset = 0.05f;
+    private const float MaxDeflection = 8f;
 
     public static void TryLaunch(ImpactContext context)
     {
@@ -74,9 +75,12 @@ internal static class FollowUpLauncher
         }
 
         var damage = context.damage * residual / context.penetration;
-        DebugLog(context, !settings.debugLog ? null : $"passed through: {numbers}, exit height {exit.y:0.00}, damage {context.damage:0.0} -> {damage:0.0}, pass {context.passes + 1}/{settings.maxPasses}");
-        var shotAngle = Mathf.Atan2(direction.y, new Vector2(direction.x, direction.z).magnitude);
-        var shotRotation = (-90f + Mathf.Rad2Deg * Mathf.Atan2(direction.z, direction.x)) % 360f;
+        var spread = MaxDeflection * Mathf.Clamp01(1f - residual / context.penetration);
+        var yaw = spread * (Rand.Value - Rand.Value);
+        var pitch = spread * (Rand.Value - Rand.Value);
+        DebugLog(context, !settings.debugLog ? null : $"passed through: {numbers}, exit height {exit.y:0.00}, deflection {yaw:0.0}/{pitch:0.0}, damage {context.damage:0.0} -> {damage:0.0}, pass {context.passes + 1}/{settings.maxPasses}");
+        var shotAngle = Mathf.Atan2(direction.y, new Vector2(direction.x, direction.z).magnitude) + pitch * Mathf.Deg2Rad;
+        var shotRotation = (-90f + Mathf.Rad2Deg * Mathf.Atan2(direction.z, direction.x) + yaw) % 360f;
 
         var projectile = (ProjectileCE)ThingMaker.MakeThing(source.def);
         GenSpawn.Spawn(projectile, cell, context.map);
