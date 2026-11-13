@@ -26,9 +26,9 @@
 	</loadAfter>
 	<description>Bullets that have enough armor penetration left after hitting a pawn keep flying and can hit whoever stands behind.
 
-What is left is worked out with Combat Extended's own numbers: the bullet's penetration, the armor on the hit body part, the body itself and the armor on the way out. Body armor, mechanoids and big animals stop most bullets. In a human, hollow points mostly stay inside while full metal jacket often goes through.
+How much is left depends on Combat Extended's own numbers for the bullet's penetration, the armor on the hit body part, the body itself and the armor on the way out. Body armor, mechanoids and big animals stop most bullets. In a human, hollow points mostly stay inside while full metal jacket often goes through.
 
 Only bullets pass through. Arrows, bolts, lasers and explosive rounds don't. Fire, explosions and other extra damage only hit the first target. Fragments don't pass through unless switched on in the settings.
 
-Walls, doors, sandbags and trees can be shot through too if you switch it on in the settings. Wood lets a lot through, steel little, stone and plasteel hardly anything. Damaged walls let more through. Natural rock, indestructible buildings and buildings without a material, like most machines, always stop bullets. Other mods can set their own values. Enemies who lose sight of someone sometimes fire blind through a door or a thin wall their ammo can get through.</description>
+Walls, doors, sandbags and trees can be shot through too. You can switch this off in the settings. Wood lets a lot through, steel little, stone and plasteel hardly anything. Damaged walls let more through. Natural rock, indestructible buildings and buildings without a material, like most machines, always stop bullets. Other mods can set their own values. Enemies who lose sight of someone sometimes fire blind through a door or a thin wall their ammo can get through.</description>
 </ModMetaData>
